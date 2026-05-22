@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-slate-800 antialiased;
+    cursor: none;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      cursor: auto;
+    }
+  }
+
+  ::selection {
+    @apply bg-jaya-cyan/30 text-jaya-navy;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/60 backdrop-blur-xl border border-white/40 shadow-premium;
+  }
+
+  .glass-dark {
+    @apply bg-jaya-navy/5 backdrop-blur-xl border border-jaya-cyan/10;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-jaya-cyan via-jaya-blue to-jaya-navy bg-clip-text text-transparent;
+  }
+
+  .text-gradient-orange {
+    @apply bg-gradient-to-r from-jaya-orange to-jaya-gold bg-clip-text text-transparent;
+  }
+
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-32;
+  }
+
+  .premium-card {
+    @apply rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-100 shadow-premium transition-all duration-500 hover:shadow-glow hover:border-jaya-cyan/20;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-jaya-cyan to-jaya-blue text-white font-semibold shadow-glow transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border-2 border-jaya-cyan/30 text-jaya-navy font-semibold backdrop-blur-sm transition-all duration-300 hover:bg-jaya-cyan/10 hover:border-jaya-cyan hover:scale-105 active:scale-95;
+  }
+
+  .magnetic-hover {
+    @apply transition-transform duration-300 ease-out;
+  }
+}
+
+@layer utilities {
+  .animate-in-view {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .no-cursor * {
+    cursor: none !important;
+  }
+}

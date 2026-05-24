@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
+import { useInView } from "@/lib/motion-shim";
 
 interface AnimatedCounterProps {
   value: number;

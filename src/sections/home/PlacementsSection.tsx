@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "@/lib/motion-shim";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { placements } from "@/data/content";

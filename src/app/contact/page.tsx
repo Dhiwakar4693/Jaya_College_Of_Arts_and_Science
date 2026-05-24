@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/lib/motion-shim";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { CTASection } from "@/sections/home/CTASection";
 import { siteConfig } from "@/data/site";

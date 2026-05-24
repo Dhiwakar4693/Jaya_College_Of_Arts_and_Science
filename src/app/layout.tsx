@@ -4,7 +4,6 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CustomCursor } from "@/components/ui/CustomCursor";
-import { SmoothScroll } from "@/components/ui/SmoothScroll";
 
 const display = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -49,7 +48,6 @@ export default function RootLayout({
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body className="font-body overflow-x-hidden">
         <CustomCursor />
-        <SmoothScroll />
         <Navbar />
         <main>{children}</main>
         <Footer />

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "@/lib/motion-shim";
 import { MapPin, Phone, Mail, Facebook, Twitter, Instagram, Youtube, Linkedin } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
@@ -39,7 +39,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6" data-cursor="pointer">
               <div className="relative w-full h-16 rounded-xl overflow-hidden">
-                <Image src="/images/college-banner.png" alt={siteConfig.name} fill className="object-contain object-left" />
+                <Image src="/images/college-logo.jpg" alt={siteConfig.name} fill className="object-contain object-left" />
               </div>
             </Link>
             <p className="text-sm text-slate-600 leading-relaxed mb-4">{siteConfig.tagline}</p>

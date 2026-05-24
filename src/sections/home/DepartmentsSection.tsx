@@ -1,31 +1,31 @@
 "use client";
 
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion } from "@/lib/motion-shim";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { departments } from "@/data/departments";
 import { ArrowUpRight } from "lucide-react";
 
 function DepartmentCard({ dept, index }: { dept: typeof departments[0]; index: number }) {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useSpring(useTransform(y, [-100, 100], [8, -8]));
-  const rotateY = useSpring(useTransform(x, [-100, 100], [-8, 8]));
+  const [rot, setRot] = React.useState({ rx: 0, ry: 0 });
 
   return (
     <RevealOnScroll delay={index * 0.1}>
-      <motion.div
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      <div
         onMouseMove={(e) => {
-          const rect = e.currentTarget.getBoundingClientRect();
-          x.set(e.clientX - rect.left - rect.width / 2);
-          y.set(e.clientY - rect.top - rect.height / 2);
+          const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          const ry = +(x / (rect.width / 2) * 8).toFixed(2);
+          const rx = +(-y / (rect.height / 2) * 8).toFixed(2);
+          setRot({ rx, ry });
         }}
-        onMouseLeave={() => { x.set(0); y.set(0); }}
-        whileHover={{ scale: 1.02 }}
-        className="group relative rounded-3xl overflow-hidden premium-card h-full min-h-[320px]"
+        onMouseLeave={() => setRot({ rx: 0, ry: 0 })}
+        className="group relative rounded-3xl overflow-hidden premium-card h-full min-h-[320px] transition-transform will-change-transform"
         data-cursor="pointer"
+        style={{ transformStyle: "preserve-3d", transform: `rotateX(${rot.rx}deg) rotateY(${rot.ry}deg)` }}
       >
         <Image src={dept.image} alt={dept.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 768px) 100vw, 33vw" />
         <div className={`absolute inset-0 bg-gradient-to-t ${dept.color} opacity-80 mix-blend-multiply`} />
@@ -38,7 +38,7 @@ function DepartmentCard({ dept, index }: { dept: typeof departments[0]; index: n
             Explore <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
-      </motion.div>
+      </div>
     </RevealOnScroll>
   );
 }

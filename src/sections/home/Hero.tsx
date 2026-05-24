@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "@/lib/motion-shim";
 import { ArrowRight, Sparkles, Award } from "lucide-react";
 import { siteConfig } from "@/data/site";
+import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 
 export function Hero() {
   return (
@@ -15,16 +16,20 @@ export function Hero() {
         transition={{ duration: 8, repeat: Infinity }}
       />
 
-      <motion.div
-        className="absolute top-1/4 -left-20 w-96 h-96 rounded-full bg-jaya-cyan/20 blur-3xl"
-        animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-        transition={{ duration: 12, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] rounded-full bg-jaya-orange/15 blur-3xl"
-        animate={{ x: [0, -20, 0], y: [0, 30, 0] }}
-        transition={{ duration: 15, repeat: Infinity }}
-      />
+      <ParallaxLayer speed={0.12} className="absolute top-1/4 -left-20 w-96 h-96 rounded-full blur-3xl">
+        <motion.div
+          className="w-full h-full bg-jaya-cyan/20 rounded-full"
+          animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
+          transition={{ duration: 12, repeat: Infinity }}
+        />
+      </ParallaxLayer>
+      <ParallaxLayer speed={0.08} className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] rounded-full blur-3xl">
+        <motion.div
+          className="w-full h-full bg-jaya-orange/15 rounded-full"
+          animate={{ x: [0, -20, 0], y: [0, 30, 0] }}
+          transition={{ duration: 15, repeat: Infinity }}
+        />
+      </ParallaxLayer>
 
       <motion.div
         className="absolute top-32 right-[15%] w-3 h-3 rounded-full bg-jaya-cyan/60"
@@ -77,13 +82,18 @@ export function Hero() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="mt-10 flex flex-wrap gap-4"
             >
-              <Link href="/admissions" className="btn-primary" data-cursor="pointer">
-                Start Your Journey
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-              <Link href="/about" className="btn-secondary" data-cursor="pointer">
-                Explore JCAS
-              </Link>
+              <motion.div whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-block">
+                <Link href="/admissions" className="btn-primary" data-cursor="pointer">
+                  Start Your Journey
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </motion.div>
+
+              <motion.div whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-block">
+                <Link href="/about" className="btn-secondary" data-cursor="pointer">
+                  Explore JCAS
+                </Link>
+              </motion.div>
             </motion.div>
 
             <motion.div
@@ -101,38 +111,39 @@ export function Hero() {
             </motion.div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="relative"
-          >
+          <ParallaxLayer speed={0.09} className="relative">
             <motion.div
-              animate={{ y: [0, -15, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative rounded-3xl overflow-hidden shadow-premium border border-white/60"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="relative"
             >
-              <div className="relative aspect-[4/3] w-full">
-                <Image
-                  src="/images/college.webp"
-                  alt={siteConfig.name}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-jaya-navy/20 via-transparent to-transparent" />
-              </div>
-            </motion.div>
+              <motion.div
+                animate={{ y: [0, -15, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="relative rounded-3xl overflow-hidden shadow-premium border border-white/60"
+              >
+                <div className="relative aspect-[4/3] w-full">
+                  <Image
+                    src="/images/college.webp"
+                    alt={siteConfig.name}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-jaya-navy/20 via-transparent to-transparent" />
+                </div>
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 }}
-              className="absolute -bottom-6 -left-6 glass rounded-2xl p-4 shadow-premium"
-            >
-              <p className="text-3xl font-bold text-gradient">32+</p>
-              <p className="text-sm text-slate-600">Years of Excellence</p>
-            </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6 }}
+                className="absolute -bottom-6 -left-6 glass rounded-2xl p-4 shadow-premium"
+              >
+                <p className="text-3xl font-bold text-gradient">32+</p>
+                <p className="text-sm text-slate-600">Years of Excellence</p>
+              </motion.div>
 
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -143,7 +154,8 @@ export function Hero() {
               <p className="text-3xl font-bold text-gradient-orange">3500+</p>
               <p className="text-sm text-slate-600">Students</p>
             </motion.div>
-          </motion.div>
+            </motion.div>
+          </ParallaxLayer>
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "@/lib/motion-shim";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { stats } from "@/data/site";

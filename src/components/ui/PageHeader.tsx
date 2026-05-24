@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "@/lib/motion-shim";
 import { RevealOnScroll } from "./RevealOnScroll";
+import { ParallaxLayer } from "./ParallaxLayer";
 
 interface PageHeaderProps {
   title: string;
@@ -23,37 +24,47 @@ export function PageHeader({ title, subtitle, badge, image }: PageHeaderProps) {
       />
 
       {image && (
-        <motion.div
-          initial={{ scale: 1.1, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.15 }}
-          transition={{ duration: 1.2 }}
-          className="absolute inset-0"
-        >
-          <Image src={image} alt="" fill className="object-cover" priority />
-        </motion.div>
+        <ParallaxLayer speed={0.08} className="absolute inset-0">
+          <motion.div
+            initial={{ scale: 1.1, opacity: 0 }}
+            animate={{ scale: 1, opacity: 0.15 }}
+            transition={{ duration: 1.2 }}
+            className="absolute inset-0"
+          >
+            <Image src={image} alt="" fill className="object-cover" priority />
+          </motion.div>
+        </ParallaxLayer>
       )}
 
-      <motion.div
-        className="absolute top-20 right-10 w-72 h-72 rounded-full bg-jaya-cyan/10 blur-3xl"
-        animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
-        transition={{ duration: 8, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute bottom-10 left-10 w-96 h-96 rounded-full bg-jaya-orange/10 blur-3xl"
-        animate={{ y: [0, 20, 0] }}
-        transition={{ duration: 10, repeat: Infinity }}
-      />
+      <ParallaxLayer speed={0.15} className="absolute top-20 right-10 w-72 h-72 rounded-full blur-3xl">
+        <motion.div
+          className="w-full h-full bg-jaya-cyan/10 rounded-full"
+          animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
+      </ParallaxLayer>
+      <ParallaxLayer speed={0.1} className="absolute bottom-10 left-10 w-96 h-96 rounded-full blur-3xl">
+        <motion.div
+          className="w-full h-full bg-jaya-orange/10 rounded-full"
+          animate={{ y: [0, 20, 0] }}
+          transition={{ duration: 10, repeat: Infinity }}
+        />
+      </ParallaxLayer>
 
-      <motion.div
-        className="absolute top-1/4 left-1/4 w-4 h-4 rounded-full bg-jaya-cyan/30"
-        animate={{ y: [0, -30, 0], opacity: [0.3, 0.8, 0.3] }}
-        transition={{ duration: 5, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute top-1/3 right-1/3 w-6 h-6 rounded-full bg-jaya-orange/20"
-        animate={{ y: [0, 25, 0] }}
-        transition={{ duration: 7, repeat: Infinity, delay: 1 }}
-      />
+      <ParallaxLayer speed={0.18} className="absolute top-1/4 left-1/4 w-4 h-4 rounded-full">
+        <motion.div
+          className="w-full h-full bg-jaya-cyan/30 rounded-full"
+          animate={{ y: [0, -30, 0], opacity: [0.3, 0.8, 0.3] }}
+          transition={{ duration: 5, repeat: Infinity }}
+        />
+      </ParallaxLayer>
+      <ParallaxLayer speed={0.12} className="absolute top-1/3 right-1/3 w-6 h-6 rounded-full">
+        <motion.div
+          className="w-full h-full bg-jaya-orange/20 rounded-full"
+          animate={{ y: [0, 25, 0] }}
+          transition={{ duration: 7, repeat: Infinity, delay: 1 }}
+        />
+      </ParallaxLayer>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}

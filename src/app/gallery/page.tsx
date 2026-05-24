@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "@/lib/motion-shim";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { CTASection } from "@/sections/home/CTASection";
 import { galleryImages } from "@/data/content";

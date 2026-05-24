@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "@/lib/motion-shim";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { Heart, Users, Trophy } from "lucide-react";
 

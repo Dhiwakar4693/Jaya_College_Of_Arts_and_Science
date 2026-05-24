@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "@/lib/motion-shim";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { testimonials } from "@/data/content";
 import { Quote } from "lucide-react";
